@@ -90,7 +90,7 @@ namespace LMSWebApi.Controllers
 
         [Route("reservebook")]
         [HttpPost]
-        public async Task<IServiceResponse<bool>> Reservebook(BookCheckDTO BookCheckDTO)
+        public async Task<IServiceResponse<bool>> Reservebook(ReserveRequest BookCheckDTO)
         {
             return await HandleApiOperationAsync(async () =>
             {

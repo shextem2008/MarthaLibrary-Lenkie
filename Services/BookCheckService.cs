@@ -14,7 +14,7 @@ namespace Services
         Task<List<BookCheckDTO>> GetCheckingListByStatus(Status status);
         Task Checkout(int id, BookCheckDTO bookCheckDTO);
         Task Checkin(int id,BookCheckDTO bookCheckDTO);
-        Task Reservebook(BookCheckDTO bookCheckDTO);
+        Task Reservebook(ReserveRequest bookCheckDTO);
     }
 
     public class BookCheckService : IBookCheckService
@@ -68,7 +68,7 @@ namespace Services
         {
             var lbookcheck = _unitOfWork.checkOutRepository.FindSingleAsync(x => x.Id == id).Result;
 
-            if (lbookcheck?.Id != 0)
+            if (lbookcheck == null)
             {
                 throw new LMEGenericException(ErrorConstants.LBOOKINFO_NOT_EXIST);
             }
@@ -106,7 +106,7 @@ namespace Services
                 throw new LMEGenericException("update not successfully");
             }
         }
-        public async Task Reservebook(BookCheckDTO bookCheckDTO)
+        public async Task Reservebook(ReserveRequest bookCheckDTO)
         {
             //checked if book is exist in the library
             var lbookdata = _unitOfWork.libraryBookRepository.FindSingleAsync(x => x.Id == bookCheckDTO.LibraryBookId).Result;
@@ -115,7 +115,7 @@ namespace Services
 
             //checked if book has been borrow or reserved by a customer and get the returned date of the book to the library.
             var lbookCheck = _unitOfWork.checkOutRepository
-                            .FindSingleAsync(x => x.LibraryBookId == bookCheckDTO.LibraryBookId && (x.Status == Status.Borrow || x.Status == Status.Reserve)).Result;
+                            .FindSingleAsync(x => x.LibraryBookId == bookCheckDTO.LibraryBookId).Result;
            
             
             if (lbookCheck == null)
@@ -125,10 +125,9 @@ namespace Services
                     LibraryBookId = bookCheckDTO.LibraryBookId,
                     CardId = 1,
                     Status = bookCheckDTO.Status,
+                    ReserveUntil = DateTime.Now.AddDays(1),
                     Since = bookCheckDTO.Since,
                     Until = bookCheckDTO.Until,
-                    Checkout = DateTime.UtcNow,
-
                 });
 
                 //make the book status not available after its been checkout by a customer              

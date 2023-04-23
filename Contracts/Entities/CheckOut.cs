@@ -13,6 +13,7 @@ namespace Contracts.Entities
         public int? CardId { get; set; }
         public virtual Wallet? Card { get; set; }
         public Status Status { get; set; }
+        public DateTime? ReserveUntil { get; set; }
         public DateTime? Since { get; set; }
         public DateTime? Until { get; set; }
         public DateTime? Checkout { get; set; }

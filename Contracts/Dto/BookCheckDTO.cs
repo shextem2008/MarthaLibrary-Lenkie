@@ -13,9 +13,20 @@ namespace Contracts.Dto
         public int? LibraryBookId { get; set; }
         public int? CardId { get; set; }
         public Status Status { get; set; }
+        public DateTime? ReserveUntil { get; set; }
         public DateTime? Since { get; set; }
         public DateTime? Until { get; set; }
         public DateTime? Checkout { get; set; }
         public DateTime? CheckIn { get; set; }
+    }
+
+    public class ReserveRequest
+    {
+        public int? LibraryBookId { get; set; }
+        public int? CardId { get; set; }
+        public Status Status { get; set; }
+        public DateTime? Since { get; set; }
+        public DateTime? Until { get; set; }
+  
     }
 }
