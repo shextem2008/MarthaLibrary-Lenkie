@@ -1,5 +1,6 @@
 using Contracts.Collections;
 using Contracts.Dto;
+using Contracts.Entities.Enums;
 using Contracts.Extensions;
 using IPagedList;
 using Microsoft.AspNetCore.Authorization;
@@ -51,33 +52,31 @@ namespace LMSWebApi.Controllers
 
         [HttpGet]
         [Route("Get/{status}")]
-        public async Task<IServiceResponse<BookCheckDTO>> GetBookCheckById(int status)
+        public async Task<IServiceResponse<List<BookCheckDTO>>> GetBookCheckById(Status status)
         {
             return await HandleApiOperationAsync(async () => {
                 var data = await _bookCheckService.GetCheckingListByStatus(status);
 
-                return new ServiceResponse<BookCheckDTO>
+                return new ServiceResponse<List<BookCheckDTO>>
                 {
                     Object = data
                 };
             });
         }
 
-        [Route("checkout")]
+        [Route("checkout/{id}")]
         [HttpPost]
-        public async Task<IServiceResponse<bool>> Checkout(BookCheckDTO BookCheckDTO)
+        public async Task<IServiceResponse<bool>> Checkout(int id, BookCheckDTO BookCheckDTO)
         {
             return await HandleApiOperationAsync(async () =>
             {
-                await _bookCheckService.Checkout(BookCheckDTO);
+                await _bookCheckService.Checkout(id,BookCheckDTO);
                 return new ServiceResponse<bool>(true);
             });
         }
-
-
-
-        [HttpPut]
+        
         [Route("checkin/{id}")]
+        [HttpPut]
         public async Task<IServiceResponse<bool>> Checkin(int id, BookCheckDTO BookCheckDTO)
         {
             return await HandleApiOperationAsync(async () =>
@@ -99,10 +98,6 @@ namespace LMSWebApi.Controllers
                 return new ServiceResponse<bool>(true);
             });
         }
-
-
-
-
 
 
     }

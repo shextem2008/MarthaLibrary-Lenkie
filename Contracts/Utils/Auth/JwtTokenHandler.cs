@@ -14,7 +14,7 @@ namespace Contracts.Utils.Auth
     public class JwtTokenHandler
     {
         public const string JWT_SECURITY_KEY = "ydf2345sdfgh2345olkjioklm456jkgsdf456JD";
-        private const int JWT_TOKEN_VALIDITY_MINS = 20;
+        private const int JWT_TOKEN_VALIDITY_MINS = 60;
         private readonly List<UserAccount> _userAcountList;
 
 
@@ -22,8 +22,8 @@ namespace Contracts.Utils.Auth
         {
             _userAcountList = new List<UserAccount>
             {
-                new UserAccount{UserName = "admin", Password ="admin123", Role ="Administrator"},
-                new UserAccount{UserName = "user01", Password ="user01", Role ="User"}
+                new UserAccount{UserName = "superadmin", Password ="123456", Role ="SuperAdministrator"},
+                //new UserAccount{UserName = "user01", Password ="user01", Role ="User"}
             };
         }
 

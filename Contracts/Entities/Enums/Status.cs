@@ -12,8 +12,9 @@ namespace Contracts.Entities.Enums
         CheckOut = 2,
         CheckIn = 3,
         Reserve = 4,
-        OnHold = 5,     
-        NotAvailable = 6,
+        Borrow = 5,
+        OnHold = 6,     
+        NotAvailable = 7,
 
     }
 }

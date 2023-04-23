@@ -37,6 +37,16 @@ namespace Services
                  select new LibraryBookDTO
                  {
                      Id = mdl.Id,
+                     Status = mdl.Status,
+                     Cost = mdl.Cost,
+                     Author = mdl.Author,
+                     ImageUrl = mdl.ImageUrl,
+                     DeweyIndex = mdl.DeweyIndex,
+                     ISBN = mdl.ISBN,
+                     LocationId = mdl.LocationId,
+                     NumberOfCopies = mdl.NumberOfCopies,
+                     Title = mdl.Title,
+                     Year = mdl.Year,
 
                  }).ToList();
 
@@ -49,6 +59,17 @@ namespace Services
             var savedata = _unitOfWork.libraryBookRepository.CreateAsync(new LibraryBook
             {
                 Id = libraryBookDTO.Id,
+                 Status = libraryBookDTO.Status,
+                  Cost = libraryBookDTO.Cost,
+                   Author = libraryBookDTO.Author,
+                    ImageUrl = libraryBookDTO.ImageUrl,
+                     DeweyIndex =  libraryBookDTO.DeweyIndex,
+                      ISBN = libraryBookDTO.ISBN,
+                       LocationId   = 1,
+                        NumberOfCopies = libraryBookDTO.NumberOfCopies,
+                         Title = libraryBookDTO.Title,
+                          Year = libraryBookDTO.Year,
+                        
             });
 
             if (!await _unitOfWork.SaveChangesAsync())

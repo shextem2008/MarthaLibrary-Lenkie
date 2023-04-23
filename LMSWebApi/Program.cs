@@ -58,10 +58,8 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IServiceHelper, ServiceHelper>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
-builder.Services.AddScoped<ITenantService, TenantService>();
 builder.Services.AddScoped<IWalletService, WalletService>();
 
-builder.Services.AddTransient<IVendorService, VendorService>();
 builder.Services.AddTransient<IClientService, ClientService>();
 builder.Services.AddTransient<ILibraryBookService, LibraryBookService>();
 builder.Services.AddTransient<IBookCheckService, BookCheckService>();
