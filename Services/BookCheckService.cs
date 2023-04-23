@@ -115,7 +115,7 @@ namespace Services
 
             //checked if book has been borrow or reserved by a customer and get the returned date of the book to the library.
             var lbookCheck = _unitOfWork.checkOutRepository
-                            .FindSingleAsync(x => x.LibraryBookId == bookCheckDTO.LibraryBookId).Result;
+                            .FindSingleAsync(x => x.LibraryBookId == bookCheckDTO.LibraryBookId && x.Status == Status.Borrow || x.Status == Status.Reserve).Result;
            
             
             if (lbookCheck == null)
@@ -128,6 +128,8 @@ namespace Services
                     ReserveUntil = DateTime.Now.AddDays(1),
                     Since = bookCheckDTO.Since,
                     Until = bookCheckDTO.Until,
+
+
                 });
 
                 //make the book status not available after its been checkout by a customer              

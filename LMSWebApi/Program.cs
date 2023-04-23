@@ -72,7 +72,7 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
-        Title = "Martha Library API (LMS's v1.0)",
+        Title = "Martha Library API (LMS v1.0)",
 
     });
     c.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme
